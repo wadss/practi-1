@@ -1,0 +1,26 @@
+[2025-07-05T20:45:45.173+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-05T20:45:45.184+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: practice_etl_pipeline.extract manual__2025-07-05T20:45:40.761560+00:00 [queued]>
+[2025-07-05T20:45:45.188+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: practice_etl_pipeline.extract manual__2025-07-05T20:45:40.761560+00:00 [queued]>
+[2025-07-05T20:45:45.189+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-07-05T20:45:45.197+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extract> on 2025-07-05 20:45:40.761560+00:00
+[2025-07-05T20:45:45.200+0000] {clientserver.py:570} INFO - Closing down clientserver connection
+[2025-07-05T20:45:45.200+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=4544) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-07-05T20:45:45.201+0000] {standard_task_runner.py:63} INFO - Started process 4679 to run task
+[2025-07-05T20:45:45.203+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'practice_etl_pipeline', 'extract', 'manual__2025-07-05T20:45:40.761560+00:00', '--job-id', '239', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmpusyk6i72']
+[2025-07-05T20:45:45.204+0000] {standard_task_runner.py:91} INFO - Job 239: Subtask extract
+[2025-07-05T20:45:45.239+0000] {task_command.py:426} INFO - Running <TaskInstance: practice_etl_pipeline.extract manual__2025-07-05T20:45:40.761560+00:00 [running]> on host 93b0937d74ff
+[2025-07-05T20:45:45.290+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='practice_etl_pipeline' AIRFLOW_CTX_TASK_ID='extract' AIRFLOW_CTX_EXECUTION_DATE='2025-07-05T20:45:40.761560+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-05T20:45:40.761560+00:00'
+[2025-07-05T20:45:45.291+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-05T20:45:46.665+0000] {logging_mixin.py:188} INFO - +----------+------+--------------------------------------+-------+
+|timestamp |status|message                               |obj_num|
++----------+------+--------------------------------------+-------+
+|2025-07-05|ИНФО  |файлы обработаны и переданы в загрузку|6      |
++----------+------+--------------------------------------+-------+
+[2025-07-05T20:45:46.670+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-07-05T20:45:46.670+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-05T20:45:46.676+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=practice_etl_pipeline, task_id=extract, run_id=manual__2025-07-05T20:45:40.761560+00:00, execution_date=20250705T204540, start_date=20250705T204545, end_date=20250705T204546
+[2025-07-05T20:45:46.698+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-07-05T20:45:46.709+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-07-05T20:45:46.712+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

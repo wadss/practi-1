@@ -1,0 +1,71 @@
+[2025-07-06T21:38:10.962+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-06T21:38:10.973+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: practice_etl_pipeline.load_log_data manual__2025-07-06T21:37:27.389745+00:00 [queued]>
+[2025-07-06T21:38:10.978+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: practice_etl_pipeline.load_log_data manual__2025-07-06T21:37:27.389745+00:00 [queued]>
+[2025-07-06T21:38:10.978+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-07-06T21:38:10.986+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_log_data> on 2025-07-06 21:37:27.389745+00:00
+[2025-07-06T21:38:10.989+0000] {clientserver.py:570} INFO - Closing down clientserver connection
+[2025-07-06T21:38:10.989+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=758) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-07-06T21:38:10.990+0000] {standard_task_runner.py:63} INFO - Started process 891 to run task
+[2025-07-06T21:38:10.992+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'practice_etl_pipeline', 'load_log_data', 'manual__2025-07-06T21:37:27.389745+00:00', '--job-id', '305', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmpu5_tnlz6']
+[2025-07-06T21:38:10.993+0000] {standard_task_runner.py:91} INFO - Job 305: Subtask load_log_data
+[2025-07-06T21:38:11.022+0000] {task_command.py:426} INFO - Running <TaskInstance: practice_etl_pipeline.load_log_data manual__2025-07-06T21:37:27.389745+00:00 [running]> on host 93b0937d74ff
+[2025-07-06T21:38:11.070+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='practice_etl_pipeline' AIRFLOW_CTX_TASK_ID='load_log_data' AIRFLOW_CTX_EXECUTION_DATE='2025-07-06T21:37:27.389745+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-06T21:37:27.389745+00:00'
+[2025-07-06T21:38:11.071+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-06T21:38:11.136+0000] {clientserver.py:529} INFO - Error while sending or receiving.
+Traceback (most recent call last):
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+[2025-07-06T21:38:11.137+0000] {clientserver.py:570} INFO - Closing down clientserver connection
+[2025-07-06T21:38:11.137+0000] {java_gateway.py:1056} INFO - Exception while sending command.
+Traceback (most recent call last):
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 530, in send_command
+    raise Py4JNetworkError(
+py4j.protocol.Py4JNetworkError: Error while sending
+[2025-07-06T21:38:11.139+0000] {clientserver.py:570} INFO - Closing down clientserver connection
+[2025-07-06T21:38:13.620+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-06T21:38:13.620+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/main.py", line 127, in load_log_data
+    .save()
+     ^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/sql/readwriter.py", line 1743, in save
+    self._jwrite.save()
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1362, in __call__
+    return_value = get_return_value(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/errors/exceptions/captured.py", line 288, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [COLUMN_NOT_DEFINED_IN_TABLE] "STRING" column `task_name` is not defined in table `LOGS`.`log`, defined table columns are: `timestamp`, `status`, `message`, `obj_num`, `task_name`. SQLSTATE: 42703
+[2025-07-06T21:38:13.631+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=practice_etl_pipeline, task_id=load_log_data, run_id=manual__2025-07-06T21:37:27.389745+00:00, execution_date=20250706T213727, start_date=20250706T213810, end_date=20250706T213813
+[2025-07-06T21:38:13.640+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 305 for task load_log_data ([COLUMN_NOT_DEFINED_IN_TABLE] "STRING" column `task_name` is not defined in table `LOGS`.`log`, defined table columns are: `timestamp`, `status`, `message`, `obj_num`, `task_name`. SQLSTATE: 42703; 891)
+[2025-07-06T21:38:13.651+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-06T21:38:13.660+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-06T21:38:13.663+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

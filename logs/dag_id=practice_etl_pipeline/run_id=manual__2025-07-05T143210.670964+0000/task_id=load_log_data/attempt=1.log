@@ -1,0 +1,90 @@
+[2025-07-05T14:32:56.405+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-05T14:32:56.417+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: practice_etl_pipeline.load_log_data manual__2025-07-05T14:32:10.670964+00:00 [queued]>
+[2025-07-05T14:32:56.422+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: practice_etl_pipeline.load_log_data manual__2025-07-05T14:32:10.670964+00:00 [queued]>
+[2025-07-05T14:32:56.423+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-07-05T14:32:56.431+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_log_data> on 2025-07-05 14:32:10.670964+00:00
+[2025-07-05T14:32:56.434+0000] {clientserver.py:570} INFO - Closing down clientserver connection
+[2025-07-05T14:32:56.435+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=1697) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-07-05T14:32:56.436+0000] {standard_task_runner.py:63} INFO - Started process 1833 to run task
+[2025-07-05T14:32:56.437+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'practice_etl_pipeline', 'load_log_data', 'manual__2025-07-05T14:32:10.670964+00:00', '--job-id', '154', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmplwv2g7uw']
+[2025-07-05T14:32:56.438+0000] {standard_task_runner.py:91} INFO - Job 154: Subtask load_log_data
+[2025-07-05T14:32:56.472+0000] {task_command.py:426} INFO - Running <TaskInstance: practice_etl_pipeline.load_log_data manual__2025-07-05T14:32:10.670964+00:00 [running]> on host 93b0937d74ff
+[2025-07-05T14:32:56.518+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='practice_etl_pipeline' AIRFLOW_CTX_TASK_ID='load_log_data' AIRFLOW_CTX_EXECUTION_DATE='2025-07-05T14:32:10.670964+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-05T14:32:10.670964+00:00'
+[2025-07-05T14:32:56.519+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-05T14:32:57.047+0000] {clientserver.py:529} INFO - Error while sending or receiving.
+Traceback (most recent call last):
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+[2025-07-05T14:32:57.048+0000] {clientserver.py:570} INFO - Closing down clientserver connection
+[2025-07-05T14:32:57.049+0000] {java_gateway.py:1056} INFO - Exception while sending command.
+Traceback (most recent call last):
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 530, in send_command
+    raise Py4JNetworkError(
+py4j.protocol.Py4JNetworkError: Error while sending
+[2025-07-05T14:32:57.051+0000] {clientserver.py:570} INFO - Closing down clientserver connection
+[2025-07-05T14:32:57.859+0000] {logging_mixin.py:188} INFO - +---------+------+-------+-------+
+|timestamp|status|message|obj_num|
++---------+------+-------+-------+
++---------+------+-------+-------+
+[2025-07-05T14:36:08.124+0000] {local_task_job_runner.py:310} WARNING - State of this instance has been externally set to None. Terminating instance.
+[2025-07-05T14:36:08.125+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-05T14:36:08.126+0000] {process_utils.py:132} INFO - Sending 15 to group 1833. PIDs of all processes in the group: [1833]
+[2025-07-05T14:36:08.126+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 1833
+[2025-07-05T14:36:08.127+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2025-07-05T14:36:08.127+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-05T14:36:08.131+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/main.py", line 91, in load_log_data
+    spark.stop()
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/sql/session.py", line 2023, in stop
+    self._sc.stop()
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/core/context.py", line 696, in stop
+    self._accumulatorServer.shutdown()
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/accumulators.py", line 320, in shutdown
+    SocketServer.TCPServer.shutdown(self)
+  File "/usr/local/lib/python3.12/socketserver.py", line 255, in shutdown
+    self.__is_shut_down.wait()
+  File "/usr/local/lib/python3.12/threading.py", line 655, in wait
+    signaled = self._cond.wait(timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 2613, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2025-07-05T14:36:08.135+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=practice_etl_pipeline, task_id=load_log_data, run_id=manual__2025-07-05T14:32:10.670964+00:00, execution_date=20250705T143210, start_date=20250705T143256, end_date=20250705T143608
+[2025-07-05T14:36:08.141+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 154 for task load_log_data ((psycopg2.errors.ForeignKeyViolation) insert or update on table "task_fail" violates foreign key constraint "task_fail_ti_fkey"
+DETAIL:  Key (dag_id, task_id, run_id, map_index)=(practice_etl_pipeline, load_log_data, manual__2025-07-05T14:32:10.670964+00:00, -1) is not present in table "task_instance".
+
+[SQL: INSERT INTO task_fail (task_id, dag_id, run_id, map_index, start_date, end_date, duration) VALUES (%(task_id)s, %(dag_id)s, %(run_id)s, %(map_index)s, %(start_date)s, %(end_date)s, %(duration)s) RETURNING task_fail.id]
+[parameters: {'task_id': 'load_log_data', 'dag_id': 'practice_etl_pipeline', 'run_id': 'manual__2025-07-05T14:32:10.670964+00:00', 'map_index': -1, 'start_date': datetime.datetime(2025, 7, 5, 14, 32, 56, 418401, tzinfo=Timezone('UTC')), 'end_date': datetime.datetime(2025, 7, 5, 14, 36, 8, 134864, tzinfo=Timezone('UTC')), 'duration': 191}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj); 1833)
+[2025-07-05T14:36:08.153+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=1833, status='terminated', exitcode=1, started='14:32:56') (1833) terminated with exit code 1

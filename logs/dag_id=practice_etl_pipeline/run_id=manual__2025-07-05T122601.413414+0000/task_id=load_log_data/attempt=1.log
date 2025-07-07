@@ -1,0 +1,41 @@
+[2025-07-05T12:26:14.745+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-05T12:26:14.759+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: practice_etl_pipeline.load_log_data manual__2025-07-05T12:26:01.413414+00:00 [queued]>
+[2025-07-05T12:26:14.764+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: practice_etl_pipeline.load_log_data manual__2025-07-05T12:26:01.413414+00:00 [queued]>
+[2025-07-05T12:26:14.764+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-07-05T12:26:14.773+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_log_data> on 2025-07-05 12:26:01.413414+00:00
+[2025-07-05T12:26:14.776+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=2975) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-07-05T12:26:14.777+0000] {standard_task_runner.py:63} INFO - Started process 2976 to run task
+[2025-07-05T12:26:14.777+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'practice_etl_pipeline', 'load_log_data', 'manual__2025-07-05T12:26:01.413414+00:00', '--job-id', '76', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmpk12kpdla']
+[2025-07-05T12:26:14.778+0000] {standard_task_runner.py:91} INFO - Job 76: Subtask load_log_data
+[2025-07-05T12:26:14.809+0000] {task_command.py:426} INFO - Running <TaskInstance: practice_etl_pipeline.load_log_data manual__2025-07-05T12:26:01.413414+00:00 [running]> on host 6802b12b52ea
+[2025-07-05T12:26:14.854+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='practice_etl_pipeline' AIRFLOW_CTX_TASK_ID='load_log_data' AIRFLOW_CTX_EXECUTION_DATE='2025-07-05T12:26:01.413414+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-05T12:26:01.413414+00:00'
+[2025-07-05T12:26:14.855+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-05T12:26:17.523+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-05T12:26:17.525+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/main.py", line 174, in load_log_data
+    log_df.show()
+    ^^^^^^
+NameError: name 'log_df' is not defined
+[2025-07-05T12:26:17.532+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=practice_etl_pipeline, task_id=load_log_data, run_id=manual__2025-07-05T12:26:01.413414+00:00, execution_date=20250705T122601, start_date=20250705T122614, end_date=20250705T122617
+[2025-07-05T12:26:17.541+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 76 for task load_log_data (name 'log_df' is not defined; 2976)
+[2025-07-05T12:26:17.558+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-05T12:26:17.567+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-05T12:26:17.569+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

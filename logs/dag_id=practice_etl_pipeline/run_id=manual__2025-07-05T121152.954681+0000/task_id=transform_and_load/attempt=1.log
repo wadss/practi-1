@@ -1,0 +1,42 @@
+[2025-07-05T12:12:01.085+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-05T12:12:01.097+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: practice_etl_pipeline.transform_and_load manual__2025-07-05T12:11:52.954681+00:00 [queued]>
+[2025-07-05T12:12:01.101+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: practice_etl_pipeline.transform_and_load manual__2025-07-05T12:11:52.954681+00:00 [queued]>
+[2025-07-05T12:12:01.102+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-07-05T12:12:01.112+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform_and_load> on 2025-07-05 12:11:52.954681+00:00
+[2025-07-05T12:12:01.115+0000] {clientserver.py:570} INFO - Closing down clientserver connection
+[2025-07-05T12:12:01.115+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=10611) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-07-05T12:12:01.117+0000] {standard_task_runner.py:63} INFO - Started process 10776 to run task
+[2025-07-05T12:12:01.118+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'practice_etl_pipeline', 'transform_and_load', 'manual__2025-07-05T12:11:52.954681+00:00', '--job-id', '52', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmpkvc8zo5z']
+[2025-07-05T12:12:01.119+0000] {standard_task_runner.py:91} INFO - Job 52: Subtask transform_and_load
+[2025-07-05T12:12:01.152+0000] {task_command.py:426} INFO - Running <TaskInstance: practice_etl_pipeline.transform_and_load manual__2025-07-05T12:11:52.954681+00:00 [running]> on host 6802b12b52ea
+[2025-07-05T12:12:01.198+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='practice_etl_pipeline' AIRFLOW_CTX_TASK_ID='transform_and_load' AIRFLOW_CTX_EXECUTION_DATE='2025-07-05T12:11:52.954681+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-05T12:11:52.954681+00:00'
+[2025-07-05T12:12:01.199+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-05T12:12:01.751+0000] {clientserver.py:529} INFO - Error while sending or receiving.
+Traceback (most recent call last):
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+[2025-07-05T12:12:01.752+0000] {clientserver.py:570} INFO - Closing down clientserver connection
+[2025-07-05T12:12:01.753+0000] {java_gateway.py:1056} INFO - Exception while sending command.
+Traceback (most recent call last):
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 530, in send_command
+    raise Py4JNetworkError(
+py4j.protocol.Py4JNetworkError: Error while sending
+[2025-07-05T12:12:01.755+0000] {clientserver.py:570} INFO - Closing down clientserver connection
+[2025-07-05T12:12:04.401+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-07-05T12:12:04.402+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-05T12:12:04.407+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=practice_etl_pipeline, task_id=transform_and_load, run_id=manual__2025-07-05T12:11:52.954681+00:00, execution_date=20250705T121152, start_date=20250705T121201, end_date=20250705T121204
+[2025-07-05T12:12:04.457+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-07-05T12:12:04.463+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

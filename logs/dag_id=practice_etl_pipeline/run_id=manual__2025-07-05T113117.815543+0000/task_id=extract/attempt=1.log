@@ -1,0 +1,66 @@
+[2025-07-05T11:31:22.179+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-05T11:31:22.191+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: practice_etl_pipeline.extract manual__2025-07-05T11:31:17.815543+00:00 [queued]>
+[2025-07-05T11:31:22.195+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: practice_etl_pipeline.extract manual__2025-07-05T11:31:17.815543+00:00 [queued]>
+[2025-07-05T11:31:22.196+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-07-05T11:31:22.204+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extract> on 2025-07-05 11:31:17.815543+00:00
+[2025-07-05T11:31:22.207+0000] {clientserver.py:570} INFO - Closing down clientserver connection
+[2025-07-05T11:31:22.208+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=87) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-07-05T11:31:22.209+0000] {standard_task_runner.py:63} INFO - Started process 261 to run task
+[2025-07-05T11:31:22.210+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'practice_etl_pipeline', 'extract', 'manual__2025-07-05T11:31:17.815543+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmpzeloclyp']
+[2025-07-05T11:31:22.211+0000] {standard_task_runner.py:91} INFO - Job 8: Subtask extract
+[2025-07-05T11:31:22.244+0000] {task_command.py:426} INFO - Running <TaskInstance: practice_etl_pipeline.extract manual__2025-07-05T11:31:17.815543+00:00 [running]> on host 6802b12b52ea
+[2025-07-05T11:31:22.293+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='practice_etl_pipeline' AIRFLOW_CTX_TASK_ID='extract' AIRFLOW_CTX_EXECUTION_DATE='2025-07-05T11:31:17.815543+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-05T11:31:17.815543+00:00'
+[2025-07-05T11:31:22.294+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-05T11:31:22.310+0000] {clientserver.py:529} INFO - Error while sending or receiving.
+Traceback (most recent call last):
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+[2025-07-05T11:31:22.311+0000] {clientserver.py:570} INFO - Closing down clientserver connection
+[2025-07-05T11:31:22.311+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-05T11:31:22.311+0000] {java_gateway.py:1056} INFO - Exception while sending command.
+Traceback (most recent call last):
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 527, in send_command
+    self.socket.sendall(command.encode("utf-8"))
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/spark/spark-4.0.0-bin-hadoop3/python/lib/py4j-0.10.9.9-src.zip/py4j/clientserver.py", line 530, in send_command
+    raise Py4JNetworkError(
+py4j.protocol.Py4JNetworkError: Error while sending
+[2025-07-05T11:31:22.313+0000] {clientserver.py:570} INFO - Closing down clientserver connection
+[2025-07-05T11:31:22.312+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/main.py", line 94, in extract
+    add_log_entry('ОШИБКА', 'в папке отсутствуют файлы', 0)
+  File "/opt/airflow/dags/main.py", line 41, in add_log_entry
+    [(datetime.datetime.now(), status, message, obj_num)],
+      ^^^^^^^^^^^^^^^^^
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+[2025-07-05T11:31:22.318+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=practice_etl_pipeline, task_id=extract, run_id=manual__2025-07-05T11:31:17.815543+00:00, execution_date=20250705T113117, start_date=20250705T113122, end_date=20250705T113122
+[2025-07-05T11:31:22.326+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 8 for task extract (type object 'datetime.datetime' has no attribute 'datetime'; 261)
+[2025-07-05T11:31:22.342+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-05T11:31:22.354+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-05T11:31:22.357+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
