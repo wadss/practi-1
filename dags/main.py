@@ -1,5 +1,7 @@
 import os
 import csv
+import pandas as pd
+from sqlalchemy import create_engine
 from dotenv import load_dotenv
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, DateType, IntegerType
@@ -33,10 +35,11 @@ LOG_SCHEMA = StructType([
 spark = SparkSession.builder \
     .appName('WaDss') \
     .master("local") \
-    .config("spark.driver.memory", "4g") \
-    .config("spark.executor.memory", "4g") \
-    .config("spark.driver.maxResultSize", "2g") \
-    .config("spark.sql.legacy.charVarcharAsString", "true") \
+    .config('spark.driver.memory', '4g') \
+    .config('spark.executor.memory', '4g') \
+    .config('spark.driver.maxResultSize', '2g') \
+    .config('spark.sql.legacy.charVarcharAsString', 'true') \
+    .config('spark.sql.decimalOperations.allowPrecisionLoss', 'false') \
     .getOrCreate()
 
 # Создание пустого DataFrame для логов
@@ -90,11 +93,16 @@ def extract(**kwargs):
 def transform_and_load(**kwargs): 
     filenames = kwargs['ti'].xcom_pull(key='extracted_filename', task_ids='extract')
     for file in filenames:
-        table_name = f'ds.{file.split('.')[0]}'
+        if file.split('_')[0] == 'dm':
+            table_name = f'dm.{file.split('.')[0]}'
+        else:
+            table_name = f'ds.{file.split('.')[0]}'
         try:
             df = spark.read.csv(CSV_PATH + file, header=True, sep=';', inferSchema=True).distinct()
+            df.show()
             df = df.select([col(c).alias(c.lower()) for c in df.columns])
             df = convert_date_columns(df)
+            df.show()
             df.write \
                 .format('jdbc') \
                 .option('url', PROPERTIES['url']) \
@@ -108,8 +116,8 @@ def transform_and_load(**kwargs):
                 .save()
             write_log_to_csv('ИНФО', f'данные таблицу {table_name} залиты', df.count(), 'task_transofrm_and_load')
     
-        except Exception as e:
-            write_log_to_csv('ОШИБКА', f'ошибка заливки данных в ds.{table_name}: {e}', df.count(), 'task_transofrm_and_load')
+        except:
+            write_log_to_csv('ОШИБКА', f'ошибка заливки данных в ds.{table_name}', df.count(), 'task_transofrm_and_load')
 
 def load_log_data(**kwargs):
     log_df = spark.read.csv(LOG_PATH, header=True, sep=';', inferSchema=True) \
@@ -126,6 +134,30 @@ def load_log_data(**kwargs):
             .save()
     os.remove(LOG_PATH)
 
+def read_data_from_table(**kwargs):
+    try:
+        conn_string = f"postgresql://{PROPERTIES['user']}:{PROPERTIES['password']}@88.218.77.95:5432/postgres"
+        engine = create_engine(conn_string)
+        query = f"""
+        SELECT *
+        FROM dm.dm_f101_round_f
+        """
+        df = pd.read_sql(query, engine)
+        df.to_csv(
+            CSV_PATH + 'to/dm_f101_round_f.csv',
+            sep=';',
+            index=False,
+            encoding='utf-8',
+            float_format='%.8f'
+        )
+        engine.dispose()
+
+        write_log_to_csv('ИНФО', '.csv файл обработан и сохранен в папку files/to/', 1, 'read_data_from_table')
+    except:
+        write_log_to_csv('ОШИБКА', 'ошибка чтения данных из таблицы и сохранения .csv файла', 0, 'read_data_from_table')
+
+
+
 with DAG(
     dag_id='practice_etl_pipeline',
     schedule=None,
@@ -138,3 +170,15 @@ with DAG(
     load_log_data_task = PythonOperator(task_id='load_log_data', python_callable=load_log_data, trigger_rule=TriggerRule.ALL_DONE)
 
     extract_task >> transform_and_load_task >> load_log_data_task
+
+with DAG(
+    dag_id='upload_form_101',
+    schedule=None,
+    start_date=datetime(2025, 7, 4),
+    catchup=False,
+    tags=['upload'],
+) as dag:
+    upload_task = PythonOperator(task_id='read_data_from_table', python_callable=read_data_from_table)
+    load_log_data_task = PythonOperator(task_id='load_log_data', python_callable=load_log_data, trigger_rule=TriggerRule.ALL_DONE)
+
+    upload_task >> load_log_data_task
